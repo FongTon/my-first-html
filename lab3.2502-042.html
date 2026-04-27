@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>登录注册系统</title>
+  
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+  
+    <div class="container">
+      
+        <div class="login-box" id="loginBox">
+            <h2>用户登录</h2>
+            <div class="input-item">
+                <label>用户名：</label>
+                <input type="text" id="loginUser" placeholder="请输入用户名">
+            </div>
+            <div class="input-item">
+                <label>密码：</label>
+                <input type="password" id="loginPwd" placeholder="请输入密码">
+            </div>
+            <div class="btn-group">
+                <button onclick="login()">登录</button>
+             
+                <button onclick="switchBox()">去注册</button>
+            </div>
+        </div>
+
+      
+        <div class="register-box" id="registerBox">
+            <h2>用户注册</h2>
+            <div class="input-item">
+                <label>用户名：</label>
+                <input type="text" id="regUser" placeholder="请设置用户名">
+            </div>
+            <div class="input-item">
+                <label>密码：</label>
+                <input type="password" id="regPwd" placeholder="请设置密码">
+            </div>
+            <div class="btn-group">
+                <button onclick="register()">注册</button>
+           
+                <button onclick="switchBox()">返回登录</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+     
+        function switchBox() {
+            let loginBox = document.getElementById('loginBox');
+            let registerBox = document.getElementById('registerBox');
+            
+    
+            if(loginBox.style.display === 'none'){
+                loginBox.style.display = 'block';
+                registerBox.style.display = 'none';
+            }else{
+                loginBox.style.display = 'none';
+                registerBox.style.display = 'block';
+            }
+        }
+
+    
+        function register() {
+            let username = document.getElementById('regUser').value.trim();
+            let password = document.getElementById('regPwd').value.trim();
+
+         
+            if(!username || !password){
+                alert('用户名和密码不能为空！');
+                return;
+            }
+
+        
+            let userInfo = {username: username, password: password};
+            localStorage.setItem('user', JSON.stringify(userInfo));
+
+            alert('注册成功！请登录');
+         
+            switchBox();
+        }
+
+       
+        function login() {
+            let loginUsername = document.getElementById('loginUser').value.trim();
+            let loginPassword = document.getElementById('loginPwd').value.trim();
+
+         
+            if(!loginUsername || !loginPassword){
+                alert('请输入用户名和密码！');
+                return;
+            }
+
+         
+            let localUser = localStorage.getItem('user');
+            
+          
+            if(!localUser){
+                alert('该用户未注册，请先注册！');
+                return;
+            }
+
+        
+            let user = JSON.parse(localUser);
+            
+       
+            if(user.username === loginUsername && user.password === loginPassword){
+                alert('登录成功！欢迎你，' + user.username);
+            }else{
+                alert('用户名或密码错误！');
+            }
+        }
+    </script>
+</body>
+</html>
