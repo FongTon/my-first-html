@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>图书管理系统</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+<!-- 登录注册容器 -->
+<div class="login-container" id="loginContainer">
+    <div class="login-box" id="loginBox">
+        <h2>用户登录</h2>
+        <div class="input-item">
+            <label>用户名：</label>
+            <input type="text" id="loginUser" placeholder="请输入用户名">
+        </div>
+        <div class="input-item">
+            <label>密码：</label>
+            <input type="password" id="loginPwd" placeholder="请输入密码">
+        </div>
+        <div class="btn-group">
+            <button class="login-btn" onclick="login()">登录</button>
+            <button onclick="switchBox()">去注册</button>
+        </div>
+    </div>
+
+    <div class="register-box" id="registerBox">
+        <h2>用户注册</h2>
+        <div class="input-item">
+            <label>用户名：</label>
+            <input type="text" id="regUser" placeholder="请设置用户名">
+        </div>
+        <div class="input-item">
+            <label>密码：</label>
+            <input type="password" id="regPwd" placeholder="请设置密码">
+        </div>
+        <div class="btn-group">
+            <button onclick="register()">注册</button>
+            <button onclick="switchBox()">返回登录</button>
+        </div>
+    </div>
+</div>
+
+<!-- 主页面 -->
+<div class="main-page" id="mainPage">
+    <div class="nav-bar">
+        <div class="logo">数字图书展销平台</div>
+        <div class="nav-right">
+            <div class="nav-item">
+                <span class="icon">🛒</span>
+                <span class="nav-text">购物车</span>
+            </div>
+            <div class="nav-item">
+                <span class="icon">🔍</span>
+                <span class="nav-text">搜索</span>
+            </div>
+            <div class="nav-item" onclick="logout()">
+                <span class="nav-text logout-text">退出登录</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="banner">
+        <h2>hot3</h2>
+        <div class="banner-item" id="banner1">
+            <img src="https://img2.baidu.com/it/u=3986526077,3014423872&fm=253&fmt=auto&app=138&f=PNG?w=500&h=650" alt="">
+        </div>
+        <div class="banner-item" id="banner2">
+            <img src="https://t15.baidu.com/it/u=1731873418,462062641&fm=224&app=112&f=JPEG?w=500&h=500&s=7892E012114770E84EF915DE000080B3" alt="">
+        </div>
+        <div class="banner-item" id="banner3">
+            <img src="https://t15.baidu.com/it/u=3546728471,672142291&fm=224&app=112&f=JPEG?w=342&h=500" alt="">
+        </div>
+    </div>
+
+    <div class="hot-books">
+        <h3>热门图书推荐</h3>
+        <div class="book-list">
+            <div class="book-item">
+                <img src="https://bkimg.cdn.bcebos.com/pic/e4dde71190ef76c6dc0ac6059516fdfaae5167c7" alt="JavaScript高级程序设计">
+                <p>JavaScript高级程序设计</p>
+            </div>
+            <div class="book-item">
+                <img src="https://img14.360buyimg.com/pop/jfs/t1/386517/15/4697/32668/69607c8fF13560af8/f378f0de00385afd.jpg" alt="CSS揭秘">
+                <p>CSS揭秘</p>
+            </div>
+            <div class="book-item">
+                <img src="https://img2.baidu.com/it/u=3971403134,3392663699&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=667" alt="HTML5权威指南">
+                <p>HTML5权威指南</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+window.onload = function() {
+    document.getElementById('mainPage').style.display = 'none';
+};
+
+function switchBox() {
+    let loginBox = document.getElementById('loginBox');
+    let registerBox = document.getElementById('registerBox');
+    loginBox.style.display = loginBox.style.display === 'none' ? 'block' : 'none';
+    registerBox.style.display = registerBox.style.display === 'block' ? 'none' : 'block';
+}
+
+function register() {
+    let username = document.getElementById('regUser').value.trim();
+    let password = document.getElementById('regPwd').value.trim();
+    if (!username || !password) {
+        alert('用户名和密码不能为空！');
+        return;
+    }
+    localStorage.setItem('user', JSON.stringify({ username, password }));
+    alert('注册成功！');
+    switchBox();
+}
+
+function login() {
+    let user = document.getElementById('loginUser').value.trim();
+    let pwd = document.getElementById('loginPwd').value.trim();
+    if (!user || !pwd) {
+        alert('请输入账号密码！');
+        return;
+    }
+    let localUser = localStorage.getItem('user');
+    if (!localUser) {
+        alert('请先注册！');
+        return;
+    }
+    let u = JSON.parse(localUser);
+    if (u.username === user && u.password === pwd) {
+        alert('登录成功！');
+        document.getElementById('loginContainer').style.display = 'none';
+        document.getElementById('mainPage').style.display = 'block';
+    } else {
+        alert('账号或密码错误！');
+    }
+}
+
+function logout() {
+    document.getElementById('loginContainer').style.display = 'block';
+    document.getElementById('mainPage').style.display = 'none';
+    document.getElementById('loginUser').value = '';
+    document.getElementById('loginPwd').value = '';
+}
+</script>
+
+</body>
+</html>

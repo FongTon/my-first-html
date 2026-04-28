@@ -1,0 +1,199 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "微软雅黑", sans-serif;
+}
+
+.login-container {
+    width: 100vw;
+    height: 100vh;
+    background: #f5f5f5;
+    position: relative;
+}
+
+.login-box, .register-box {
+    width: 400px;
+    height: 320px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 40px 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.register-box {
+    display: none;
+}
+
+.login-box h2, .register-box h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.input-item {
+    margin-bottom: 20px;
+}
+
+.input-item label {
+    display: inline-block;
+    width: 70px;
+    color: #666;
+}
+
+.input-item input {
+    width: 250px;
+    height: 38px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.btn-group {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.btn-group button {
+    width: 100px;
+    height: 38px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    background: #409eff;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-group button:hover {
+    background: #66b1ff;
+}
+
+.main-page {
+    display: none;
+}
+
+.nav-bar {
+    width: 100%;
+    height: 60px;
+    background: #333;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+}
+
+.logo {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.nav-right {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.icon {
+    font-size: 20px;
+    transition: transform 0.5s;
+}
+
+.nav-item:hover .icon {
+    transform: rotate(360deg);
+}
+
+.nav-text {
+    font-size: 14px;
+}
+
+.logout-text {
+    color: #ff6b6b;
+    font-weight: bold;
+}
+
+.banner {
+    width: 20%;
+    height: 360px;
+    position: relative;
+    overflow: hidden;
+}
+
+.banner-item {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0;
+    animation: slide 9s infinite;
+}
+
+.banner-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#banner1 { animation-delay: 0s; }
+#banner2 { animation-delay: 3s; }
+#banner3 { animation-delay: 6s; }
+
+@keyframes slide {
+    0% { opacity: 0; transform: translateY(100%); }
+    10% { opacity: 1; transform: translateY(0); }
+    30% { opacity: 1; transform: translateY(0); }
+    40% { opacity: 0; transform: translateY(-100%); }
+    100% { opacity: 0; transform: translateY(-100%); }
+}
+
+.hot-books {
+    width: 900px;
+    margin: 50px auto;
+}
+
+.hot-books h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.book-list {
+    display: flex;
+    justify-content: space-between;
+}
+
+.book-item {
+    width: 200px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.book-item img {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.book-item p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.book-item:hover {
+    transform: translateY(-5px) scale(1.03);
+}
